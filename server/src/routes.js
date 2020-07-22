@@ -25,4 +25,6 @@ module.exports = (app) => {
  app.get('/users',
  UserController.index
  )
+
+
 }

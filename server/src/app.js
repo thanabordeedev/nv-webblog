@@ -42,6 +42,11 @@ app.get('/users', function(req, res) {
     res.send('เรียกข้อมูลผู้ใช้งานทั้งหมด')
 })
 
+// get lastest user
+app.get('/userlastest', function(req, res) {
+    res.send('เรียกข้อมูลผู้ใช้งานลำดับสุดท้าย ' + JSON.stringify(req.body))
+})
+
 // create user
 app.post('/user/', function(req, res) {
     res.send('ทําการสร้างผู้ใช้งาน: '+ JSON.stringify(req.body)
