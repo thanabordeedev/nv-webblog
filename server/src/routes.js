@@ -26,7 +26,7 @@ module.exports = (app) => {
 
  // get all user
  app.get('/users',
-    isAuthenController,
+   isAuthenController,
     UserController.index
  )
 
