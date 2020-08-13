@@ -7,6 +7,7 @@
             <li><router-link :to="{name: 'comments'}" >Comments</router-link></li>
             <li><router-link :to="{name: 'login'}" >Login</router-link></li>
             <li><router-link :to="{name: 'blogs'}" >Blogs</router-link></li>
+            <li><a v-on:click.prevent="logout" href="#">Logout</a></li>
             </ul>
             <div class="clearfix"></div>
         </div>
@@ -14,10 +15,21 @@
 </template>
 <script>
 export default {
+
+    logout () {
+        this.$store.dispatch('setToken', null)
+        this.$store.dispatch('setUser', null)
+        this.$router.push({
+            name: 'login'
+        })
+    }
  }
+
+ 
 </script>
 <style scoped>
-<style scoped>
+
+
 .nv-navbar {
     background-color:palegoldenrod;
     width: 100%;
