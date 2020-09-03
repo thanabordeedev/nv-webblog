@@ -8,7 +8,9 @@
             <p>comment: {{ comment.comment }}</p>
             <p>
                 <button v-on:click="navigateTo('/comment/'+ comment.id)">ดู comment</button>
+                <button v-on:click="navigateTo('/comment/')">แก้ใข comment</button>
                 <button v-on:click="deleteComment(comment)">ลบข้อมูล</button>
+                
             </p>
             <hr>
         </div>
