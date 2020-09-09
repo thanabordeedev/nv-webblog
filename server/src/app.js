@@ -1,19 +1,9 @@
 let express= require('express')
+const app= express()
 let bodyParser= require('body-parser')
 let cors = require('cors')
 const {sequelize} = require('./models')
-require('./userPassport')
-
 const config = require('./config/config')
-
-const app= express()
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(cors())
-app.use('/assets', express.static('public'))
-
-require('./routes')(app)
 
 let port = process.env.PORT || config.port
 
@@ -23,11 +13,20 @@ sequelize.sync({force: false}).then(() => {
     })
 })
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(cors())
+app.use('/assets', express.static('public'))
+//app.use('/assets', express.static('src/public'))
+
+require('./userPassport')
+require('./routes')(app)
+
 app.get('/status', function(req, res){
     res.send('Hello nodejs server')
 })
 
-app.post('/hello', function (req, res) {
+/*app.post('/hello', function (req, res) {
     res.send('OK you post - ' + req.body.name)
 })
 
@@ -65,5 +64,5 @@ app.put('/user/:userId', function(req, res) {
 // delete user
 app.delete('/user/:userId', function(req, res) {
     res.send('ทําการลบผุ้ใช้งาน: '+ req.params.userId+ ' : '+ JSON.stringify(req.body))
-})
+})*/
 

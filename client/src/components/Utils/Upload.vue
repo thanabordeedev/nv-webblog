@@ -43,7 +43,7 @@ export default {
       currentStatus: null,
       uploadFieldName: "userPhoto",
       uploadedFileNames: [],
-    };
+    }
   },
 
   methods: {
@@ -91,6 +91,7 @@ export default {
       setTimeout(() => this.reset(), 5000);
     },
   },
+
   computed: {
     isInitial() {
       return this.currentStatus === STATUS_INITIAL;
