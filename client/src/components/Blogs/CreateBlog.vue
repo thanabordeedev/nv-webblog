@@ -2,13 +2,13 @@
   <div>
     <h1>Create Blog</h1>
     <form v-on:submit.prevent="createBlog">
-      <p> title:<input type="text" v-model="blog.title"> </p>
-      
-      <div class="thumbnail-pic" v-if="blog.thumbnail != 'null'">
-        
-        <img :src="BASE_URL+blog.thumbnail" alt="thumbnail" />
-      </div>
-      <p><button von:click.prevent="useThumbnail(picture.name)">Thumbnail</button></p>
+      <p>title:<input type="text" v-model="blog.title"> </p>
+      <transition name="fade">
+        <div class="thumbnail-pic" v-if="blog.thumbnail != 'null'">
+          <img :src="BASE_URL+blog.thumbnail" alt="thumbnail" />
+        </div>
+      </transition>
+      <p><button v-on:click.prevent="useThumbnail(picture.name)">Thumbnail</button></p>
       <!--uploads -->
       <form enctype="multipart/form-data" novalidate>
         <div class="dropbox">
@@ -34,13 +34,13 @@ $event.target.files); fileCount = $event.target.files.length"
       <!--upload end-->
 
       <div>
-        <ul class="pictures">
+        <transition-group tag="ul" name="fade" class="pictures"> 
           <li v-for="picture in pictures" v-bind:key="picture.id">
             <img style="margin-bottom:5px;" :src="BASE_URL+picture.name" alt="picture image" />
             <br />
             <button v-on:click.prevent="delFile(picture)">Delete</button>
           </li>
-        </ul>
+        </transition-group>
         <div class="clearfix"></div>
       </div>
 
@@ -86,16 +86,6 @@ const STATUS_INITIAL = 0,
 export default {
   data() {
     return {
-      // upload data
-      BASE_URL: "http://localhost:8081/assets/uploads/",
-      error: null,
-      uploadError: null,
-      currentStatus: null,
-      uploadFieldName: "userPhoto",
-      uploadedFileNames: [],
-      pictures: [],
-      pictureIndex: 0,
-
       blog: {
         title: "",
         thumbnail: "null",
@@ -110,6 +100,16 @@ export default {
         ],
         height: 300,
       },
+
+    // upload data
+      BASE_URL: "http://localhost:8081/assets/uploads/",
+      error: null,
+      uploadError: null,
+      currentStatus: null,
+      uploadFieldName: "userPhoto",
+      uploadedFileNames: [],
+      pictures: [],
+      pictureIndex: 0,
     };
   },
 
@@ -147,8 +147,6 @@ export default {
         console.log(filename);
         this.blog.thumbnail = filename;
     },
-
-    
 
     // upload
     wait(ms) {

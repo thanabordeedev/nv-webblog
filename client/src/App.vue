@@ -17,4 +17,15 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   color: #2c3e50;
 }
+
+/* Fade transition */
+.fade-enter, .fade-leave-to {
+ opacity: 0;
+}
+.fade-enter-active, .fade-leave-active {
+ transition: opacity 0.5s;
+}
+.fade-enter-to {
+ opacity: 1;
+}
 </style>
